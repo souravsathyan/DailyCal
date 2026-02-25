@@ -1,0 +1,159 @@
+@import 'tailwindcss';
+@import 'uniwind';
+
+@import 'heroui-native/styles';
+/* Path to the heroui-native lib inside node_modules relative to global.css */
+@source './node_modules/heroui-native/lib';
+
+@theme {
+  /* Primitive Colors (Do not change between light and dark) */
+  --white: oklch(100% 0 0);
+  --black: oklch(0% 0 0);
+  --snow: oklch(0.9911 0 0);
+  --eclipse: oklch(0.2103 0.0059 285.89);
+
+  /* Border */
+  --border-width: 1px;
+  --field-border-width: 0px;
+
+  /* Base radius */
+  --radius: 0.5rem;
+  --field-radius: calc(var(--radius) * 1.5);
+
+  /* Opacity */
+  --opacity-disabled: 0.5;
+}
+
+@layer theme {
+  :root {
+    @variant light {
+      /* Base Colors */
+      --background: oklch(0.975 0 0);
+      --foreground: oklch(0.15 0 0);
+
+      /* Surface: Used for non-overlay components (cards, accordions, disclosure groups) */
+      --surface: var(--white);
+      --surface-foreground: var(--foreground);
+
+      --surface-secondary: oklch(0.95 0 0);
+      --surface-secondary-foreground: var(--foreground);
+
+      --surface-tertiary: oklch(0.9 0 0);
+      --surface-tertiary-foreground: var(--foreground);
+
+      /* Overlay: Used for floating/overlay components (dialogs, popovers, modals, menus) */
+      --overlay: var(--white);
+      --overlay-foreground: var(--foreground);
+
+      --muted: oklch(0.55 0 0);
+
+      --default: oklch(0.12 0 0);
+      --default-foreground: var(--white);
+
+      --accent: oklch(0.6 0.16 250);
+      --accent-foreground: var(--white);
+
+      /* Form Fields */
+      --field-background: var(--white);
+      --field-foreground: oklch(0.15 0 0);
+      --field-placeholder: var(--muted);
+      --field-border: transparent; /* no border by default on form fields */
+
+      /* Status Colors */
+      --success: oklch(0.7 0.15 140);
+      --success-foreground: var(--white);
+
+      --warning: oklch(0.75 0.15 65);
+      --warning-foreground: var(--white);
+
+      --danger: oklch(0.6 0.2 25);
+      --danger-foreground: var(--white);
+
+      /* Component Colors */
+      --segment: var(--white);
+      --segment-foreground: var(--foreground);
+
+      /* Misc Colors */
+      --border: oklch(0.92 0 0);
+      --separator: oklch(0.9 0 0);
+      --focus: var(--accent);
+      --link: var(--accent);
+
+      /* Shadows */
+      --surface-shadow:
+        0 4px 20px 0 rgba(0, 0, 0, 0.03), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+      --overlay-shadow:
+        0 8px 30px 0 rgba(0, 0, 0, 0.08), 0 4px 10px 0 rgba(0, 0, 0, 0.03);
+      --field-shadow:
+        0 1px 3px 0 rgba(0, 0, 0, 0.04);
+
+      --font-normal: 'Poppins_400Regular';
+      --font-medium: 'Poppins_500Medium';
+      --font-semibold: 'Poppins_600SemiBold';
+      --font-bold: 'Poppins_700Bold';
+    }
+
+    @variant dark {
+      /* Base Colors */
+      --background: oklch(0.15 0 0);
+      --foreground: oklch(0.98 0 0);
+
+      /* Surface: Used for non-overlay components (cards, accordions, disclosure groups) */
+      --surface: oklch(0.2 0 0);
+      --surface-foreground: var(--foreground);
+
+      --surface-secondary: oklch(0.25 0 0);
+      --surface-secondary-foreground: var(--foreground);
+
+      --surface-tertiary: oklch(0.3 0 0);
+      --surface-tertiary-foreground: var(--foreground);
+
+      /* Overlay: Used for floating/overlay components (dialogs, popovers, modals, menus) - lighter for contrast */
+      --overlay: oklch(0.2 0 0);
+      --overlay-foreground: var(--foreground);
+
+      --muted: oklch(0.6 0 0);
+
+      --default: oklch(0.98 0 0);
+      --default-foreground: oklch(0.15 0 0);
+
+      --accent: oklch(0.6 0.16 250);
+      --accent-foreground: oklch(1 0 0);
+
+      /* Form Field Defaults - Colors (only the ones that are different from light theme) */
+      --field-background: oklch(0.2 0 0);
+      --field-foreground: var(--foreground);
+      --field-placeholder: var(--muted);
+      --field-border: transparent; /* no border by default on form fields */
+
+      /* Status Colors */
+      --success: oklch(0.7 0.15 140);
+      --success-foreground: oklch(1 0 0);
+
+      --warning: oklch(0.75 0.15 65);
+      --warning-foreground: oklch(1 0 0);
+
+      --danger: oklch(0.6 0.2 25);
+      --danger-foreground: oklch(1 0 0);
+
+      /* Component Colors */
+      --segment: oklch(0.25 0 0);
+      --segment-foreground: var(--foreground);
+
+      /* Misc Colors */
+      --border: oklch(0.3 0 0);
+      --separator: oklch(0.3 0 0);
+      --focus: var(--accent);
+      --link: var(--accent);
+
+      /* Shadows */
+      --surface-shadow: 0 0 0 0 transparent inset; /* No shadow on dark mode */
+      --overlay-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.1) inset;
+      --field-shadow: 0 0 0 0 transparent inset; /* Transparent shadow to allow ring utilities to work */
+    }
+  }
+}
+
+* {
+  font-family: 'Poppins_400Regular';
+}

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { View, ViewStyle, StatusBar, Platform, useColorScheme } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useThemeStore } from '../store/useThemeStore';
+import { useUniwind } from 'uniwind';
 
 interface EdgeToEdgeViewProps {
   children: React.ReactNode;
@@ -31,7 +31,8 @@ const EdgeToEdgeView: React.FC<EdgeToEdgeViewProps> = ({
   // Force a re-render if OS phone setting changes while app is active
   useColorScheme();
   
-  const { theme, isDarkOrEquivalent } = useThemeStore(state => state.getActiveThemeDetails());
+  const { theme } = useUniwind();
+  const isDarkOrEquivalent = theme === 'dark';
 
   const barStyle = statusBarStyle || (isDarkOrEquivalent ? 'light-content' : 'dark-content');
 
@@ -40,12 +41,10 @@ const EdgeToEdgeView: React.FC<EdgeToEdgeViewProps> = ({
     paddingBottom: excludeBottom || !edges.includes('bottom') ? 0 : insets.bottom,
     paddingLeft: excludeLeft || !edges.includes('left') ? 0 : insets.left,
     paddingRight: excludeRight || !edges.includes('right') ? 0 : insets.right,
-    backgroundColor: theme.background,
-    flex: 1,
-  }), [insets, theme.background, excludeTop, excludeBottom, excludeLeft, excludeRight, edges]);
+  }), [insets, excludeTop, excludeBottom, excludeLeft, excludeRight, edges]);
 
   return (
-    <View style={[containerStyle, style]}>
+    <View style={[containerStyle, style]} className="flex-1 bg-white">
       <StatusBar
         barStyle={barStyle}
         backgroundColor={statusBarBackgroundColor || 'transparent'}

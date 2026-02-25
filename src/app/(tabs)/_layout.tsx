@@ -1,12 +1,12 @@
-import { Tabs } from 'expo-router';
+import { Tabs } from "expo-router";
 export default function TabLayout() {
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: 'blue' }}>
+    <Tabs screenOptions={{ tabBarActiveTintColor: "blue", headerShown: false }}>
       {/* Matches the index.tsx file in this folder */}
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: "Home",
           // tabBarIcon: ({ color }) => <Icon name="home" color={color} />,
         }}
       />
@@ -14,7 +14,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="profile"
         options={{
-          title: 'Profile',
+          title: "Profile",
           // tabBarIcon: ({ color }) => <Icon name="user" color={color} />,
         }}
       />
