@@ -14,7 +14,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.souravsathyan.DailyCal"
+      "bundleIdentifier": "com.orion.DailyCal"
     },
     "android": {
       "adaptiveIcon": {
@@ -23,7 +23,8 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.souravsathyan.DailyCal"
+      "package": "com.orion.DailyCal",
+      "usesCleartextTraffic": true
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -31,7 +32,8 @@
     "plugins": [
       "expo-router",
       "expo-secure-store",
-      "expo-font"
+      "expo-font",
+      "expo-sqlite"
     ]
   }
 }

@@ -1,7 +1,7 @@
-@import 'tailwindcss';
-@import 'uniwind';
+@import "tailwindcss";
+@import "uniwind";
 
-@import 'heroui-native/styles';
+@import "heroui-native/styles";
 /* Path to the heroui-native lib inside node_modules relative to global.css */
 @source './node_modules/heroui-native/lib';
 
@@ -84,13 +84,12 @@
         0 4px 20px 0 rgba(0, 0, 0, 0.03), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
       --overlay-shadow:
         0 8px 30px 0 rgba(0, 0, 0, 0.08), 0 4px 10px 0 rgba(0, 0, 0, 0.03);
-      --field-shadow:
-        0 1px 3px 0 rgba(0, 0, 0, 0.04);
+      --field-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
 
-      --font-normal: 'Poppins_400Regular';
-      --font-medium: 'Poppins_500Medium';
-      --font-semibold: 'Poppins_600SemiBold';
-      --font-bold: 'Poppins_700Bold';
+      --font-normal: "Poppins_400Regular";
+      --font-medium: "Poppins_500Medium";
+      --font-semibold: "Poppins_600SemiBold";
+      --font-bold: "Poppins_700Bold";
     }
 
     @variant dark {
@@ -150,10 +149,15 @@
       --surface-shadow: 0 0 0 0 transparent inset; /* No shadow on dark mode */
       --overlay-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.1) inset;
       --field-shadow: 0 0 0 0 transparent inset; /* Transparent shadow to allow ring utilities to work */
+
+      --font-normal: "Poppins_400Regular";
+      --font-medium: "Poppins_500Medium";
+      --font-semibold: "Poppins_600SemiBold";
+      --font-bold: "Poppins_700Bold";
     }
   }
 }
 
 * {
-  font-family: 'Poppins_400Regular';
+  font-family: "Poppins_400Regular";
 }
