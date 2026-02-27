@@ -15,6 +15,7 @@ import {
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { useAuthStore } from "@/store/useAuthStore";
+import { useOnboardingStore } from "@/store/useOnboardingStore";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -23,18 +24,28 @@ Uniwind.setTheme("light");
 
 const RootStack = () => {
   const { session, isHydrated } = useAuthStore();
+  const hasCompletedOnboarding = useOnboardingStore(
+    (state) => state.isOnboardingComplete,
+  );
 
   useEffect(() => {
     if (!isHydrated) return;
-  }, [session]);
+  }, [session, isHydrated]);
 
   return (
     <Stack>
-      <Stack.Protected guard={!!session}>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      {/* If onboarding is not complete, show it first */}
+      <Stack.Protected guard={hasCompletedOnboarding}>
+        <Stack.Protected guard={!!session}>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        </Stack.Protected>
+        <Stack.Protected guard={!session}>
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        </Stack.Protected>
       </Stack.Protected>
-      <Stack.Protected guard={!session}>
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+
+      <Stack.Protected guard={!hasCompletedOnboarding}>
+        <Stack.Screen name="(onboarding)" options={{ headerShown: false }} />
       </Stack.Protected>
     </Stack>
   );
