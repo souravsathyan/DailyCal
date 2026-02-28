@@ -16,8 +16,8 @@
   --border-width: 1px;
   --field-border-width: 0px;
 
-  /* Base radius */
-  --radius: 0.5rem;
+  /* Base radius — rounded-lg (0.5rem) applied to all buttons globally */
+  --radius: 0.2rem;
   --field-radius: calc(var(--radius) * 1.5);
 
   /* Opacity */
@@ -50,7 +50,8 @@
       --default: oklch(0.12 0 0);
       --default-foreground: var(--white);
 
-      --accent: oklch(0.6 0.16 250);
+      /* --accent: oklch(0.6 0.16 250); */
+      --accent: var(--color-slate-900);
       --accent-foreground: var(--white);
 
       /* Form Fields */

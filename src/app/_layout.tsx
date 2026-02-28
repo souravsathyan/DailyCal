@@ -15,7 +15,7 @@ import {
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { useAuthStore } from "@/store/useAuthStore";
-import { useOnboardingStore } from "@/store/useOnboardingStore";
+import { View, ActivityIndicator } from "react-native";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -23,29 +23,34 @@ SplashScreen.preventAutoHideAsync();
 Uniwind.setTheme("light");
 
 const RootStack = () => {
-  const { session, isHydrated } = useAuthStore();
-  const hasCompletedOnboarding = useOnboardingStore(
-    (state) => state.isOnboardingComplete,
-  );
+  const { session, isHydrated, isOnboarded } = useAuthStore();
 
-  useEffect(() => {
-    if (!isHydrated) return;
-  }, [session, isHydrated]);
+  // isOnboarded === null means still loading from DB → show loader
+  const isLoading = !!session && isOnboarded === null;
+
+  if (!isHydrated || isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
 
   return (
     <Stack>
-      {/* If onboarding is not complete, show it first */}
-      <Stack.Protected guard={hasCompletedOnboarding}>
-        <Stack.Protected guard={!!session}>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        </Stack.Protected>
-        <Stack.Protected guard={!session}>
-          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        </Stack.Protected>
+      {/* Logged in + onboarded → tabs */}
+      <Stack.Protected guard={!!session && isOnboarded === true}>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack.Protected>
 
-      <Stack.Protected guard={!hasCompletedOnboarding}>
+      {/* Logged in + not onboarded → onboarding */}
+      <Stack.Protected guard={!!session && isOnboarded === false}>
         <Stack.Screen name="(onboarding)" options={{ headerShown: false }} />
+      </Stack.Protected>
+
+      {/* Not logged in → auth */}
+      <Stack.Protected guard={!session}>
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       </Stack.Protected>
     </Stack>
   );

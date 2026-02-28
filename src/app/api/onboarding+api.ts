@@ -1,10 +1,9 @@
 // Note: You must run `expo-router` API endpoints using an Express wrapper or via EAS / local server start.
 // This is a simple mock endpoint for the onboarding submission.
 
-import { ExpoRequest } from 'expo-router/server';
 // import { supabase } from '@/lib/supabase'; // Uncomment when DB is ready
 
-export async function POST(req: ExpoRequest) {
+export async function POST(req: Request) {
   try {
     const body = await req.json();
     const { height, weight, age, gender, activityLevel } = body;

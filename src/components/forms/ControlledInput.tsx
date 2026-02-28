@@ -54,8 +54,10 @@ export const ControlledInput = <T extends FieldValues>({
         field: { onChange, onBlur, value },
         fieldState: { error },
       }) => (
-        <TextField isInvalid={!!error} className="mb-4">
-          <Label>{label}</Label>
+        <TextField isInvalid={!!error} className="mb-4 ">
+          <Label>
+            <Label.Text className="text-sm">{label}</Label.Text>
+          </Label>
           <View className="relative">
             <Input
               placeholder={placeholder}
@@ -65,7 +67,7 @@ export const ControlledInput = <T extends FieldValues>({
               secureTextEntry={isPasswordField && !isPasswordVisible}
               autoCapitalize={autoCapitalize}
               keyboardType={keyboardType}
-              className={isPasswordField ? "pr-12" : ""}
+              className={isPasswordField ? "pr-12 border" : "border"}
             />
             {isPasswordField && (
               <TouchableOpacity
