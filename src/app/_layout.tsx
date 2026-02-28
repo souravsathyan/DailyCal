@@ -52,6 +52,16 @@ const RootStack = () => {
       <Stack.Protected guard={!session}>
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       </Stack.Protected>
+
+      {/* Food scan modal screens — accessible when logged in */}
+      <Stack.Screen
+        name="food-scan"
+        options={{ headerShown: false, presentation: "fullScreenModal" }}
+      />
+      <Stack.Screen
+        name="food-scan-result"
+        options={{ headerShown: false, presentation: "fullScreenModal" }}
+      />
     </Stack>
   );
 };

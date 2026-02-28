@@ -34,7 +34,19 @@
       "expo-secure-store",
       "expo-font",
       "expo-sqlite",
-      "@react-native-community/datetimepicker"
+      "@react-native-community/datetimepicker",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow DailyCal to access your camera to scan food and calculate calories."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow DailyCal to access your photo library to pick food images."
+        }
+      ]
     ]
   }
 }
