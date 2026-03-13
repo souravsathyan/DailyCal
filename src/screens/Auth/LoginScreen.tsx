@@ -1,18 +1,18 @@
-import React from "react";
-import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { useRouter } from "expo-router";
-import { Button } from "heroui-native";
-import { ControlledInput } from "@/components/forms/ControlledInput";
-import { useAuthStore } from "@/store/useAuthStore";
-import { useAppToast } from "@/hooks/useAppToast";
+import React from 'react';
+import { View, Text, TouchableOpacity, ActivityIndicator, StyleSheet } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { useRouter } from 'expo-router';
+import { Button } from 'heroui-native';
+import { ControlledInput } from '@/components/forms/ControlledInput';
+import { useAuthStore } from '@/store/useAuthStore';
+import { useAppToast } from '@/hooks/useAppToast';
 
 const loginSchema = z.object({
-  email: z.string().email("Please enter a valid email address"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
+  email: z.string().email('Please enter a valid email address'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
 });
 
 type LoginFormValues = z.infer<typeof loginSchema>;
@@ -25,7 +25,7 @@ export default function LoginScreen() {
 
   const { control, handleSubmit } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
-    defaultValues: { email: "", password: "" },
+    defaultValues: { email: '', password: '' },
   });
 
   const onSubmit = async (data: LoginFormValues) => {
@@ -37,35 +37,35 @@ export default function LoginScreen() {
 
       if (error) throw error;
 
-      showSuccess("Success", "Welcome back!");
+      showSuccess('Success', 'Welcome back!');
       // Navigation is handled automatically by _layout.tsx via isOnboarded state
     } catch (error: any) {
       const isUnverified =
-        error?.message?.toLowerCase().includes("email not confirmed") ||
-        error?.message?.toLowerCase().includes("not confirmed");
+        error?.message?.toLowerCase().includes('email not confirmed') ||
+        error?.message?.toLowerCase().includes('not confirmed');
 
       if (isUnverified) {
         showError(
-          "Email Not Verified",
-          "Please check your inbox and verify your email before logging in.",
+          'Email Not Verified',
+          'Please check your inbox and verify your email before logging in.',
         );
       } else {
-        console.log("Login Error", error.message);
-        showError("Error", error.message || "Login failed");
+        console.error('Login Error', error.message);
+        showError('Error', error.message || 'Login failed');
       }
     }
   };
 
+  // console.log('isLoading', isLoading);
+
   return (
     <KeyboardAwareScrollView
       className="flex-1 bg-white"
-      contentContainerStyle={{ flexGrow: 1 }}
+      contentContainerStyle={styles.flexGrow}
       bottomOffset={20}
     >
       <View className="flex-1 p-6 justify-center">
-        <Text className="text-4xl font-poppins-600 text-black mb-2">
-          Welcome Back,
-        </Text>
+        <Text className="text-4xl font-poppins-600 text-black mb-2">Welcome Back,</Text>
         <Text className="text-base font-poppins-400 text-gray-500 mb-10">
           Sign in to continue to DailyCal.
         </Text>
@@ -101,10 +101,8 @@ export default function LoginScreen() {
         </Button>
 
         <View className="flex-row justify-center mt-8">
-          <Text className="text-gray-500 font-poppins-400">
-            Don't have an account?{" "}
-          </Text>
-          <TouchableOpacity onPress={() => router.push("/(auth)/signup")}>
+          <Text className="text-gray-500 font-poppins-400">Dont have an account? </Text>
+          <TouchableOpacity onPress={() => router.push('/(auth)/signup')}>
             <Text className="text-blue-600 font-poppins-600">Sign Up</Text>
           </TouchableOpacity>
         </View>
@@ -112,3 +110,9 @@ export default function LoginScreen() {
     </KeyboardAwareScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  flexGrow: {
+    flexGrow: 1,
+  },
+});
